@@ -25,6 +25,19 @@ Maps show you pins. They do not promise you will be back on time. **CityQuest tu
 
 It works on any street, not just the Ferry Building: give it your phone's location, point the camera at a landmark, or name a street, and it builds the world from live data in under a second.
 
+## The vision
+
+| | |
+|---|---|
+| <img src="docs/images/vision-sf-diorama.jpg" alt="isometric San Francisco waterfront diorama with a glowing quest path"> | <img src="docs/images/vision-quest-runner.jpg" alt="runner on a glowing path toward a clock tower with coffee and croissant tokens"> |
+| **Your next hour becomes a game level:** a glowing route through the real streets around you. | **Every collectible is a real place** that is open right now, checked against live data. |
+| <img src="docs/images/vision-building-breakdown.jpg" alt="cut-open market hall with green and red rings on stalls"> | <img src="docs/images/vision-game-city.jpg" alt="stylized sunset San Francisco game world"> |
+| **Break the building open:** see what is inside and which places are open (green) or closed (red). The sim does this live with Google 3D Tiles. | **Any neighborhood becomes playable**, because the world is built from live data, not from a map we drew. |
+| <img src="docs/images/vision-conference-gap.jpg" alt="conference floor with a person following a phone route out to a cafe"> | <img src="docs/images/vision-accessible-street.jpg" alt="accessible street with tactile paving, a wheelchair user and open cafes"> |
+| **Who it is for first:** the 20-minute gap at a conference or a hackathon. | **Where it goes next:** routes that respect access needs, where a verified time budget matters most. |
+
+<sub>Vision art generated with Gemini Nano Banana 2.1 (`scripts/gen_vision_images.py`). Every screenshot below is the real app.</sub>
+
 ## What happens in one request
 
 | | |
