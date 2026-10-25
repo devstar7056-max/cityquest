@@ -1,0 +1,25 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+result.json
+*.log
+.DS_Store
+node_modules/
+recordings/
+# videos and personal media (not published)
+media/
+*.mp4
+*.webm
+*.mov
+web/media/
+web/fixtures/
+fixtures/
+# Google Places content is fetched live; do not republish cached Places data
+data/merchants.json
+data/city_memory.jsonl
+data/city_memory*.json
+data/io_gallery.json
+docs/superpowers/

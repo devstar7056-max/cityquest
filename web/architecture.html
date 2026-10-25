@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CityQuest Architecture | Gemini 4 Argon SF Hackathon</title>
+<style>
+  :root {
+    --bg: #080b11;
+    --panel: #101622;
+    --panel-hover: #172033;
+    --border: #25334d;
+    --text: #f0f6fc;
+    --muted: #94a3b8;
+    --cyan: #38bdf8;
+    --green: #4ade80;
+    --amber: #fbbf24;
+    --red: #f87171;
+    --purple: #c084fc;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.45;
+    padding: 20px 28px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    overflow-x: hidden;
+  }
+
+  /* Header & Controls */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .brand h1 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand h1 span.tag {
+    font-size: 0.95rem;
+    font-family: var(--font-mono);
+    background: rgba(56, 189, 248, 0.14);
+    color: var(--cyan);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  .brand p {
+    color: var(--muted);
+    font-size: 1.08rem;
+    margin-top: 4px;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  button {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 11px 18px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  button:hover {
+    background: var(--panel-hover);
+    border-color: var(--cyan);
+  }
+
+  button.primary {
+    background: linear-gradient(135deg, #0284c7, #2563eb);
+    border-color: #38bdf8;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+  }
+
+  button.primary:hover {
+    background: linear-gradient(135deg, #0369a1, #1d4ed8);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.45);
+  }
+
+  button.secondary {
+    background: rgba(192, 132, 252, 0.12);
+    border-color: rgba(192, 132, 252, 0.5);
+    color: #e9d5ff;
+  }
+
+  button.secondary:hover {
+    background: rgba(192, 132, 252, 0.24);
+    border-color: var(--purple);
+  }
+
+  /* Live Simulation Status Bar */
+  .sim-bar {
+    background: #0c121e;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 18px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .sim-timer {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--cyan);
+    min-width: 170px;
+  }
+
+  .sim-status {
+    font-size: 1.12rem;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sim-badge {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: rgba(148, 163, 184, 0.15);
+    color: var(--muted);
+  }
+
+  .sim-badge.pass { background: rgba(74, 222, 128, 0.18); color: var(--green); border: 1px solid var(--green); }
+  .sim-badge.fail { background: rgba(248, 113, 113, 0.18); color: var(--red); border: 1px solid var(--red); }
+  .sim-badge.run { background: rgba(56, 189, 248, 0.18); color: var(--cyan); border: 1px solid var(--cyan); }
+
+  /* Main Workspace */
+  .workspace {
+    display: grid;
+    grid-template-columns: 1fr 430px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  @media (max-width: 1280px) {
+    .workspace {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Architecture Diagram Canvas */
+  .diagram-panel {
+    background: var(--panel);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .lane-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+
+  /* Interactive Flow Layout */
+  .pipeline-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    position: relative;
+  }
+
+  @media (max-width: 980px) {
+    .pipeline-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: center;
+  }
+
+  .node {
+    background: #131c2e;
+    border: 2px solid #2b3b59;
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 128px;
+    justify-content: space-between;
+  }
+
+  .node:hover {
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+    background: #182338;
+  }
+
+  .node.selected {
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+    background: #19253b;
+  }
+
+  /* Animation States */
+  .node.active-step {
+    border-color: var(--cyan);
+    box-shadow: 0 0 22px rgba(56, 189, 248, 0.55);
+    background: #1a2942;
+  }
+
+  .node.fail-step {
+    border-color: var(--red);
+    box-shadow: 0 0 22px rgba(248, 113, 113, 0.55);
+    background: #2a1822;
+  }
+
+  .node.pass-step {
+    border-color: var(--green);
+    box-shadow: 0 0 18px rgba(74, 222, 128, 0.35);
+  }
+
+  .node.sandbox-step {
+    border-color: var(--purple);
+    box-shadow: 0 0 22px rgba(192, 132, 252, 0.45);
+  }
+
+  .node-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .node-step-num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.07);
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .node-latency {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(56, 189, 248, 0.14);
+    color: var(--cyan);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+  }
+
+  .node-latency.green {
+    background: rgba(74, 222, 128, 0.14);
+    color: var(--green);
+    border-color: rgba(74, 222, 128, 0.3);
+  }
+
+  .node-latency.amber {
+    background: rgba(251, 191, 36, 0.14);
+    color: var(--amber);
+    border-color: rgba(251, 191, 36, 0.3);
+  }
+
+  .node-latency.purple {
+    background: rgba(192, 132, 252, 0.14);
+    color: var(--purple);
+    border-color: rgba(192, 132, 252, 0.3);
+  }
+
+  .node-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .node-model {
+    font-family: var(--font-mono);
+    font-size: 0.86rem;
+    color: #cbd5e1;
+    word-break: break-word;
+  }
+
+  .node-sub {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  /* Flow Connector Badges */
+  .flow-hint {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    padding: 3px 0;
+  }
+
+  /* Offline Generated Once Row */
+  .assets-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  @media (max-width: 900px) {
+    .assets-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Right Sidebar: Inspector + Live HUD Log */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .inspector-card, .hud-card {
+    background: var(--panel);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+  }
+
+  .inspector-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+  }
+
+  .inspector-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--cyan);
+  }
+
+  .inspector-model {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--amber);
+    margin-top: 4px;
+  }
+
+  .inspector-section {
+    margin-bottom: 14px;
+  }
+
+  .inspector-section h4 {
+    font-size: 0.88rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .inspector-section p, .inspector-section li {
+    font-size: 1.03rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .inspector-section ul {
+    padding-left: 18px;
+  }
+
+  .metric-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .metric-pill {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    background: #0b101b;
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: var(--green);
+  }
+
+  /* Streaming HUD Log */
+  .hud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .hud-header h3 {
+    font-size: 1.05rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .hud-clock {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--cyan);
+  }
+
+  .hud-log {
+    background: #070a10;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    height: 250px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .log-line {
+    line-height: 1.35;
+    word-break: break-word;
+  }
+
+  .log-line .t { color: var(--muted); margin-right: 6px; }
+  .log-line.info { color: #e2e8f0; }
+  .log-line.pass { color: var(--green); }
+  .log-line.fail { color: var(--red); }
+  .log-line.agent { color: var(--purple); }
+  .log-line.route { color: var(--cyan); }
+
+  /* Footer summary table */
+  .benchmarks-bar {
+    background: var(--panel);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 980px) {
+    .benchmarks-bar {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .bench-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .bench-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .bench-val {
+    font-family: var(--font-mono);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  .bench-sub {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    color: var(--cyan);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <h1>
+      CityQuest Architecture
+      <span class="tag">Gemini 4 Argon SF Hackathon (Oct 25, 2026)</span>
+    </h1>
+    <p>Maps tell you where to go. Games give you a reason to explore. Every collectible is a real place around the SF Ferry Building open right now.</p>
+  </div>
+  <div class="controls">
+    <button class="primary" id="btnPlayInitial" onclick="runSimulation('initial')">
+      &#9654; Play a Request (13.3 s Measured)
+    </button>
+    <button class="secondary" id="btnPlayReplan" onclick="runSimulation('replan')">
+      &#8635; Play Replan (11.0 s Measured)
+    </button>
+    <button onclick="resetSimulation()">
+      Reset
+    </button>
+  </div>
+</header>
+
+<div class="sim-bar">
+  <div class="sim-timer" id="simTimer">t = 0.00 s</div>
+  <div class="sim-status" id="simStatus">
+    Click any architecture box to inspect its role and real measured latency, or press "Play a Request" to animate a real run.
+  </div>
+  <div class="sim-badge" id="simBadge">IDLE</div>
+</div>
+
+<div class="workspace">
+  <!-- Left: Interactive Architecture Diagram -->
+  <div class="diagram-panel">
+    <div class="lane-header">
+      <span>Live Request Pipeline (Browser &rarr; FastAPI on Cloud Run :8010 &rarr; Google APIs &amp; Sandbox)</span>
+      <span>Click any box for details &amp; AGENTS.md notes</span>
+    </div>
+
+    <div class="pipeline-grid">
+      <!-- Column 1: Entry (Voice or Typed) -->
+      <div class="col">
+        <div class="node" id="node-voice" onclick="selectNode('voice')">
+          <div class="node-top">
+            <span class="node-step-num">INPUT A</span>
+            <span class="node-latency green">Ephemeral Token</span>
+          </div>
+          <div class="node-title">Live Voice Barge-In</div>
+          <div class="node-model">gemini-3.8-live</div>
+          <div class="node-sub">Non-blocking <code>plan_quest</code> &amp; <code>replan</code> tools</div>
+        </div>
+
+        <div class="flow-hint">OR</div>
+
+        <div class="node" id="node-typed" onclick="selectNode('typed')">
+          <div class="node-top">
+            <span class="node-step-num">INPUT B</span>
+            <span class="node-latency">POST /api/plan</span>
+          </div>
+          <div class="node-title">Typed Request</div>
+          <div class="node-model">/api/plan &amp; /api/replan</div>
+          <div class="node-sub">"45 minutes, good coffee, uniquely SF, back on time"</div>
+        </div>
+      </div>
+
+      <!-- Column 2: Intent Routing -->
+      <div class="col">
+        <div class="node" id="node-router" onclick="selectNode('router')">
+          <div class="node-top">
+            <span class="node-step-num">STEP 1</span>
+            <span class="node-latency">1.5 s</span>
+          </div>
+          <div class="node-title">Intent Routing</div>
+          <div class="node-model">gemini-3.5-flash-lite</div>
+          <div class="node-sub">Classifies <code>new_quest</code>, <code>replan</code>, or <code>chit_chat</code>; extracts minutes &amp; wants</div>
+        </div>
+      </div>
+
+      <!-- Column 3: World Director -->
+      <div class="col">
+        <div class="node" id="node-director" onclick="selectNode('director')">
+          <div class="node-top">
+            <span class="node-step-num">STEP 2</span>
+            <span class="node-latency amber">10.8 s (Replan 9.1 s)</span>
+          </div>
+          <div class="node-title">World Director</div>
+          <div class="node-model">gemini-4-argon</div>
+          <div class="node-sub">Interactions API, structured JSON, <code>thinking_level: low</code>, <code>previous_interaction_id</code></div>
+        </div>
+      </div>
+
+      <!-- Column 4: Dual Verification + Swap Ranking -->
+      <div class="col">
+        <div class="node" id="node-local-verify" onclick="selectNode('local-verify')">
+          <div class="node-top">
+            <span class="node-step-num">STEP 3A (LOCAL)</span>
+            <span class="node-latency green">0.95 s total</span>
+          </div>
+          <div class="node-title">Local Verifier</div>
+          <div class="node-model">Places (114 ms) + Routes (191 ms)</div>
+          <div class="node-sub">Runs <code>verify_quest.py</code> immediately; checks hours &amp; walk budget</div>
+        </div>
+
+        <div class="node" id="node-swap" onclick="selectNode('swap')">
+          <div class="node-top">
+            <span class="node-step-num">STEP 3B (SWAP)</span>
+            <span class="node-latency">Parallel Leaf</span>
+          </div>
+          <div class="node-title">Swap Ranking</div>
+          <div class="node-model">gemini-3.8-flash</div>
+          <div class="node-sub">Ranks replacement stops from candidates for any failing stop in parallel</div>
+        </div>
+
+        <div class="node" id="node-sandbox" onclick="selectNode('sandbox')">
+          <div class="node-top">
+            <span class="node-step-num">STEP 3C (PARALLEL)</span>
+            <span class="node-latency purple">86.9 s audit</span>
+          </div>
+          <div class="node-title">Antigravity Sandbox</div>
+          <div class="node-model">antigravity-preview-09-2026 + gemini-4-argon</div>
+          <div class="node-sub">Credential proxy injects <code>x-goog-api-key</code>; streams stdout to HUD</div>
+        </div>
+      </div>
+
+      <!-- Column 5: SSE to HUD & 3D Map -->
+      <div class="col">
+        <div class="node" id="node-sse-hud" onclick="selectNode('sse-hud')">
+          <div class="node-top">
+            <span class="node-step-num">STEP 4A</span>
+            <span class="node-latency green">Live Stream</span>
+          </div>
+          <div class="node-title">SSE to Real-Time HUD</div>
+          <div class="node-model">GET /api/events</div>
+          <div class="node-sub">Streams step timings, real API checks, and sandbox <code>step.start</code> commands</div>
+        </div>
+
+        <div class="node" id="node-map3d" onclick="selectNode('map3d')">
+          <div class="node-top">
+            <span class="node-step-num">STEP 4B</span>
+            <span class="node-latency green">13.3 s E2E</span>
+          </div>
+          <div class="node-title">Photorealistic 3D Map</div>
+          <div class="node-model">Map3DElement + Polyline3DElement</div>
+          <div class="node-sub">Numbered pins, failing stops pulse red, swaps drop green, <code>flyCameraTo</code></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Lane: Assets Generated Once -->
+    <div class="lane-header" style="margin-top: 6px;">
+      <span>Assets Generated Once Offline (<code>scripts/gen_assets.py</code> &amp; <code>scripts/resolve_places.py</code>)</span>
+      <span>Never blocks live demo turns</span>
+    </div>
+
+    <div class="assets-row">
+      <div class="node" id="node-sprites" onclick="selectNode('sprites')">
+        <div class="node-top">
+          <span class="node-step-num">ASSET 1</span>
+          <span class="node-latency">15 Sprites</span>
+        </div>
+        <div class="node-title">Collectible Sprites</div>
+        <div class="node-model">gemini-nano-banana-2.1</div>
+        <div class="node-sub">15 reward sprites generated once into <code>web/sprites/</code>, cropped square with <code>sips -c</code></div>
+      </div>
+
+      <div class="node" id="node-lyria" onclick="selectNode('lyria')">
+        <div class="node-top">
+          <span class="node-step-num">ASSET 2</span>
+          <span class="node-latency">30 s Loop</span>
+        </div>
+        <div class="node-title">Background Audio Loop</div>
+        <div class="node-model">lyria-3-clip-preview</div>
+        <div class="node-sub">One 30 s ambient loop generated once into <code>web/audio/</code></div>
+      </div>
+
+      <div class="node" id="node-research" onclick="selectNode('research')">
+        <div class="node-top">
+          <span class="node-step-num">ASSET 3</span>
+          <span class="node-latency amber">704 s (42 places)</span>
+        </div>
+        <div class="node-title">Merchant Facts</div>
+        <div class="node-model">deep-research-preview-04-2026</div>
+        <div class="node-sub">Cited one-line description for Ferry Building merchants (41 of 42 returned with source URL)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Inspector & Live HUD Log -->
+  <div class="sidebar">
+    <div class="inspector-card" id="inspectorCard">
+      <div class="inspector-header">
+        <div>
+          <div class="inspector-title" id="inspTitle">World Director</div>
+          <div class="inspector-model" id="inspModel">gemini-4-argon (Interactions API)</div>
+        </div>
+      </div>
+
+      <div class="inspector-section">
+        <h4>What It Does Here</h4>
+        <p id="inspDesc"></p>
+      </div>
+
+      <div class="inspector-section">
+        <h4>Measured Latencies (From Docs)</h4>
+        <div class="metric-pills" id="inspMetrics"></div>
+      </div>
+
+      <div class="inspector-section">
+        <h4>Implementation &amp; Quirks Hit Today (AGENTS.md)</h4>
+        <ul id="inspNotes"></ul>
+      </div>
+    </div>
+
+    <div class="hud-card">
+      <div class="hud-header">
+        <h3>HUD Event Stream (<code>/api/events</code>)</h3>
+        <span class="hud-clock" id="hudClock">14:37:00 PDT</span>
+      </div>
+      <div class="hud-log" id="hudLog">
+        <div class="log-line info"><span class="t">14:37:00</span>Ready. Nothing in the HUD is mocked. Every line is a real API result or sandbox command.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Measured Summary Bar -->
+<div class="benchmarks-bar">
+  <div class="bench-item">
+    <span class="bench-label">Typed Prompt to Verified Quest</span>
+    <span class="bench-val">13.3 s</span>
+    <span class="bench-sub">Route 1.5 s | Director 10.8 s | Verify 0.95 s</span>
+  </div>
+  <div class="bench-item">
+    <span class="bench-label">Live API Checks (Inside Verify)</span>
+    <span class="bench-val">114 ms / 191 ms</span>
+    <span class="bench-sub">Places API 114 ms | Routes WALK 191 ms</span>
+  </div>
+  <div class="bench-item">
+    <span class="bench-label">Replan ("15 minutes, something sweet")</span>
+    <span class="bench-val">11.0 s</span>
+    <span class="bench-sub">Director 9.1 s (delta) | Verify 0.5 s</span>
+  </div>
+  <div class="bench-item">
+    <span class="bench-label">Managed Agent Independent Audit</span>
+    <span class="bench-val">86.9 s</span>
+    <span class="bench-sub">Cold 19.7 s / Warm 18.5 s | Same verdict as local</span>
+  </div>
+</div>
+
+<script>
+  const NODES = {
+    'voice': {
+      title: 'Live Voice with Ephemeral Tokens',
+      model: 'gemini-3.8-live',
+      desc: 'Handles voice in and out in the browser with barge-in support and non-blocking plan_quest and replan tool calls. Hosted on Cloud Run over HTTPS so phone microphones work.',
+      metrics: [
+        'Single-use ephemeral tokens via POST /api/live-token',
+        'Target replan turnaround: under 15 s'
+      ],
+      notes: [
+        'Keys come only from environment variables (GEMINI_API_KEY, MAPS_SERVER_KEY, MAPS_BROWSER_KEY).',
+        'POST /api/live-token mints a single-use ephemeral token so the Gemini API key never enters the browser.',
+        'Gemini 3.8 Flash TTS (gemini-3.8-flash-tts) is available for spoken quest cards only where Live is not already speaking.'
+      ]
+    },
+    'typed': {
+      title: 'Typed Request Entry',
+      model: 'POST /api/plan & POST /api/replan',
+      desc: 'Accepts natural language time budgets and cravings such as "45 minutes, good coffee, something uniquely San Francisco, back on time" starting and ending at SHACK15 (1 Ferry Building, Suite 201).',
+      metrics: [
+        'Typed prompt to verified quest: 13.3 s end to end',
+        'Typed replan ("15 minutes, something sweet"): 11.0 s end to end'
+      ],
+      notes: [
+        'Port 8000 on the dev Mac was taken by another project, so CityQuest runs on port 8010 locally.',
+        'CityQuest never books, buys or messages anyone. It only plans and checks.'
+      ]
+    },
+    'router': {
+      title: 'Intent Routing & Guardrail',
+      model: 'gemini-3.5-flash-lite',
+      desc: 'Classifies incoming user text or voice transcript as new_quest, replan, or chit_chat, and extracts the time budget in minutes and specific wants before invoking the World Director.',
+      metrics: [
+        'Integration 1 measured route latency: 1.5 s'
+      ],
+      notes: [
+        'Runs as the fast initial guardrail before calling Gemini 4 Argon.',
+        'Shared genai.Client() instance is kept in a server variable so the client does not close mid-request.'
+      ]
+    },
+    'director': {
+      title: 'World Director',
+      model: 'gemini-4-argon (Interactions API)',
+      desc: 'Plans a 2 to 4 stop quest around the SF Ferry Building as schema-checked JSON using only resolved place_ids from data/merchants.json. Replans as a delta using previous_interaction_id.',
+      metrics: [
+        'Integration 1 Director: 10.8 s',
+        'Replan Director (previous_interaction_id): 9.1 s (10.9 s in benchmark)',
+        'Full PLACES list benchmark: low = 11.4 s, medium = 14.6 s',
+        'Short planning prompt (2:13 PM): low = 5.00 s, medium = 4.43 s'
+      ],
+      notes: [
+        'Kept thinking_level="low" for every turn to stay well under the 25 s plan and 15 s replan targets.',
+        'Argon returns JSON wrapped in a 

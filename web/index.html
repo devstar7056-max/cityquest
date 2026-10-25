@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CityQuest</title>
+  <link rel="stylesheet" href="/web/styles.css">
+  <script>/*__CONFIG__*/</script>
+</head>
+<body>
+  <div id="map"></div>
+
+  <section id="hud" aria-live="polite">
+    <div class="hud-row">
+      <div id="clock" class="clock">--:--:--</div>
+      <div id="badge" class="badge idle">READY</div>
+    </div>
+    <div id="generated" class="generated">No quest yet</div>
+    <div id="path" class="path"></div>
+    <table id="timings" class="timings">
+      <tr><td>transcript</td><td data-k="transcript">-</td><td>scan</td><td data-k="scan">-</td></tr>
+      <tr><td>director</td><td data-k="director">-</td><td>places</td><td data-k="places">-</td></tr>
+      <tr><td>routes</td><td data-k="routes">-</td><td>verify</td><td data-k="verify">-</td></tr>
+      <tr><td>render</td><td data-k="render">-</td><td>total</td><td data-k="total">-</td></tr>
+    </table>
+    <ol id="log" class="log"></ol>
+  </section>
+
+  <section id="card" class="card hidden">
+    <div class="card-head">
+      <div>
+        <div id="q-title" class="q-title"></div>
+        <div id="q-meta" class="q-meta"></div>
+      </div>
+      <div id="q-points" class="q-points"></div>
+    </div>
+    <div id="q-cost" class="q-cost hidden"></div>
+    <div id="q-change" class="q-change hidden"></div>
+    <ol id="q-stops" class="q-stops"></ol>
+  </section>
+
+  <div id="preview-wrap" class="preview-wrap hidden"><video id="preview" playsinline></video><span>gemini-3.8-live sees this</span></div>
+  <button type="button" id="replay" class="replay hidden">▶ Replay recorded video through the live pipeline</button>
+
+  <form id="ask" class="ask" autocomplete="off">
+    <button type="button" id="mic" class="mic" title="Camera + voice" aria-label="Start camera and voice">🎙️</button>
+    <label class="mic filebtn" title="Replay a recorded video (its frames and voice)" aria-label="Replay a recorded video">🎞️<input id="file" type="file" accept="video/*" hidden></label>
+    <input id="prompt" name="prompt" placeholder="45 minutes, good coffee, something uniquely San Francisco" aria-label="What do you want to do?">
+    <button type="submit" id="go" class="go">Go</button>
+    <a class="mic filebtn" href="/sim" target="_blank" rel="noopener" title="Open the 3D headset sim (mirrors this session)" aria-label="Open the 3D headset sim">🥽</a>
+  </form>
+  <div id="caption" class="caption hidden"></div>
+
+  <script type="module" src="/web/app.js"></script>
+</body>
+</html>

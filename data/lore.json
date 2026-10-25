@@ -1,0 +1,260 @@
+{
+  "agent": "deep-research-preview-04-2026",
+  "interaction_id": "v1_ChdWSExlYW9LVklzZjUtc0FQMzh5emdRTRIXVkhMZWFvS1ZJc2Y1LXNBUDM4eXpnUU0",
+  "generated_at": "2026-10-25T14:30:59-0700",
+  "status": "completed",
+  "items": [
+    {
+      "key": "the-frenchy-gourmet",
+      "what": "Artisan kefir-based yogurt made without additives in seasonal rotating flavors.",
+      "local": "Bay Area",
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/the-frenchy-gourmet/"
+    },
+    {
+      "key": "arquet",
+      "what": "Details on specific food items served are currently unavailable.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "red-bay-coffee",
+      "what": "Specialty coffee and espresso beverages sourced beautifully and sustainably.",
+      "local": "Bay Area",
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "parachute",
+      "what": "Rotating menu of seasonal pastries and fresh baked goods.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "nash-bakes",
+      "what": "Artisan cheesecakes with a continually rotating menu of classic flavors.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops_categories/sweet-treats/"
+    },
+    {
+      "key": "nopa-fish",
+      "what": "Sustainable, traceable fish, seafood dishes, chowders, and farm salads.",
+      "local": "SF",
+      "source_url": "https://www.sfgate.com/food/article/sf-ferry-building-fish-counter-19656363.php"
+    },
+    {
+      "key": "ocean-malasada",
+      "what": "Portuguese-style malasadas, a yeast-leavened fried dough rolled in sugar.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "lunette-cambodia",
+      "what": "Cambodian cuisine including South Asian noodle and rice dishes.",
+      "local": "SF",
+      "source_url": "https://xtinenyc.substack.com/p/the-sf-guide"
+    },
+    {
+      "key": "obour-foods",
+      "what": "Organic hummus and tahini in various globally inspired flavors.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "a16-la-pala",
+      "what": "Award-winning restaurant serving Southern Italian food inspired by Puglia.",
+      "local": "SF",
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops_categories/restaurants-cafes/"
+    },
+    {
+      "key": "peaches-patties",
+      "what": "Fresh homemade Jamaican patties and other popular Jamaican items.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "fatted-calf",
+      "what": "Handcrafted charcuterie, whole-animal butchery, salumi, sausages, roasts, and terrines.",
+      "local": "Bay Area",
+      "source_url": "https://www.williams-sonoma.com/pages/taylor-and-toponia.html"
+    },
+    {
+      "key": "senor-sisig",
+      "what": "Filipino fusion street-food, including highly popular tacos and burritos.",
+      "local": "SF",
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "cholita-linda",
+      "what": "Freshly made Baja fish and carnitas tacos and agua fresca.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "fog-city-flea-trading-post",
+      "what": "Handcrafted jewelry, apparel, accessories, apothecary, housewares, art, and vintage.",
+      "local": "SF",
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/fog-city-flea-trading-post/"
+    },
+    {
+      "key": "tsar-nicoulai-caviar",
+      "what": "Small-batch American caviar and a seasonal farm-to-table cafe menu.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "mishka-dog-boutique",
+      "what": "Gourmet, organic, and healthy dog treats and artisanal dog cakes.",
+      "local": "SF",
+      "source_url": "https://www.prweb.com/releases/mishka-luxury-dog-boutique-now-shipping-their-instagram-worthy-gourmet-dog-cakes-302360451.html"
+    },
+    {
+      "key": "epicurean-trader",
+      "what": "Small-batch artisan food, wine, craft spirits, and farmstead cheeses.",
+      "local": "SF",
+      "source_url": "https://theepicureantrader.com/pages/our-story"
+    },
+    {
+      "key": "village-market",
+      "what": "General store selling craft beer, pantry staples, and dry goods.",
+      "local": "Bay Area",
+      "source_url": "https://villagemkt.com/about-us/"
+    },
+    {
+      "key": "stonehouse-california-olive-oil",
+      "what": "California extra virgin olive oils, notably their popular citrus oils.",
+      "local": null,
+      "source_url": "https://www.stonehouseoliveoil.com/pages/about"
+    },
+    {
+      "key": "recchiuti-confections",
+      "what": "Artisanal handcrafted chocolates, truffles, caramels, and European-style confections.",
+      "local": "SF",
+      "source_url": "https://chocolateaffairsmagazine.com/chocolatier/michael-recchiuti/"
+    },
+    {
+      "key": "miette-patisserie",
+      "what": "French-inspired pastries, cakes, cookies, and imported European pick-and-mix candies.",
+      "local": "Bay Area",
+      "source_url": "https://www.miette.com/story"
+    },
+    {
+      "key": "mariposa-baking-company",
+      "what": "High-quality, artisan gluten-free breads, pastries, cakes, and sweet treats.",
+      "local": "Bay Area",
+      "source_url": "https://pickup.mariposabaking.com/pages/about-us"
+    },
+    {
+      "key": "imperial-tea-court",
+      "what": "Traditional Chinese teas, including black, green, white, yellow, and puerh.",
+      "local": "SF",
+      "source_url": "https://en.wikipedia.org/wiki/Imperial_Tea_Court"
+    },
+    {
+      "key": "humphry-slocombe",
+      "what": "Innovative and unconventional ice cream featuring bold, unique flavor profiles.",
+      "local": "SF",
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "hog-island-oyster-company",
+      "what": "Locally raised oysters, shellfish, and drinks in a full-service restaurant.",
+      "local": "Bay Area",
+      "source_url": "https://www.baycrossings.com/ferry-building-marketplace-directory/"
+    },
+    {
+      "key": "bernal-cutlery",
+      "what": "Kitchen knives, cutlery, and culinary tools for professionals and home-cooks.",
+      "local": "SF",
+      "source_url": "https://sanfrancisco-shopping.com/ferry-building"
+    },
+    {
+      "key": "fort-point-beer-company",
+      "what": "Quality craft beer brewed with traditional San Franciscan values.",
+      "local": "SF",
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "ferry-plaza-wine-merchant",
+      "what": "Curated selection of fine wines, craft beers, and artisanal spirits.",
+      "local": "SF",
+      "source_url": "https://www.marketwatchmag.com/ferry-plaza-wine-merchant-julaug-2016/"
+    },
+    {
+      "key": "foodwise-ferry-plaza-farmers-market",
+      "what": "California-certified farmers market offering sustainable produce, meats, and artisanal products.",
+      "local": "SF",
+      "source_url": "https://foodwise.org/about/history-of-foodwise/"
+    },
+    {
+      "key": "far-west-fungi",
+      "what": "Fresh, dried, and wild culinary mushrooms and wild-foraged foods.",
+      "local": "SF",
+      "source_url": "https://californiagrown.org/blog/far-west-fungis-retail-and-restaurant-locations/"
+    },
+    {
+      "key": "el-porteno-empanadas",
+      "what": "Hand-made, artisanal Argentine-style empanadas with diverse seasonal fillings.",
+      "local": "Bay Area",
+      "source_url": "https://elporteno.com/about/"
+    },
+    {
+      "key": "delica",
+      "what": "Japanese delicatessen offering bento boxes, sushi, salads, and prepared foods.",
+      "local": "SF",
+      "source_url": "https://www.delicasf.com/about"
+    },
+    {
+      "key": "dandelion-chocolate",
+      "what": "Small-batch craft chocolate bars, hot chocolate, and delicate chocolate confections.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "book-passage",
+      "what": "Independent bookstore offering a wide selection of new books.",
+      "local": "Bay Area",
+      "source_url": "https://www.baycrossings.com/ferry-building-marketplace-directory/"
+    },
+    {
+      "key": "blue-bottle-coffee",
+      "what": "Drip coffee, espresso beverages, and New Orleans-style iced coffee.",
+      "local": "Bay Area",
+      "source_url": "https://www.sftravel.com/jp/node/2826"
+    },
+    {
+      "key": "benedetta",
+      "what": "Farm-sourced, biodynamic, and organic botanical skin and body care products.",
+      "local": "Bay Area",
+      "source_url": "https://lifeoutofbounds.com/2016/03/02/ferry-building-marketplace-san-francisco/"
+    },
+    {
+      "key": "bay-crossings",
+      "what": "Ferry tickets, newspapers, gifts, postcards, maps, and Ferry Building memorabilia.",
+      "local": null,
+      "source_url": "https://www.baycrossings.com/ferry-building-marketplace-directory/"
+    },
+    {
+      "key": "gott-s-roadside",
+      "what": "High-quality burgers, fries, fish tacos, shakes, and classic roadside fare.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "heath-ceramics",
+      "what": "Handcrafted mid-century modern American tableware, ceramics, and pottery.",
+      "local": null,
+      "source_url": "https://www.ferrybuildingmarketplace.com/shops/"
+    },
+    {
+      "key": "acme-bread-company",
+      "what": "European-style breads, morning breads, and ciabatta rolls using organic flour.",
+      "local": null,
+      "source_url": "https://www.baycrossings.com/ferry-building-marketplace-directory/"
+    },
+    {
+      "key": "reem-s",
+      "what": null,
+      "local": null,
+      "source_url": null
+    }
+  ]
+}

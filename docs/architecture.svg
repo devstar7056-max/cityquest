@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 940" width="1400" height="940" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#121a2e"/>
+    </linearGradient>
+    <linearGradient id="argon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4da3ff"/>
+      <stop offset="1" stop-color="#8b6cff"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8fb4e8"/>
+    </marker>
+    <marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2ecc71"/>
+    </marker>
+    <style>
+      .lane { fill: #0f1729; stroke: #22314f; stroke-width: 1.5; }
+      .laneTitle { fill: #8fb4e8; font-size: 15px; font-weight: 800; letter-spacing: 1.5px; }
+      .card { fill: #16213a; stroke: #2b3d63; stroke-width: 1.5; }
+      .cardHot { fill: #182544; stroke: url(#argon); stroke-width: 2.5; }
+      .cardAgent { fill: #13261f; stroke: #2ecc71; stroke-width: 2; }
+      .cardMem { fill: #22183a; stroke: #b18cff; stroke-width: 2; }
+      .h { fill: #f4ede1; font-size: 15px; font-weight: 800; }
+      .t { fill: #c3cee0; font-size: 12.5px; }
+      .m { fill: #ffb020; font-size: 11px; font-weight: 700; font-family: ui-monospace, Menlo, Consolas, monospace; }
+      .flow { stroke: #8fb4e8; stroke-width: 2; fill: none; }
+      .flowG { stroke: #2ecc71; stroke-width: 2; fill: none; stroke-dasharray: 6 5; }
+      .flowP { stroke: #b18cff; stroke-width: 2; fill: none; stroke-dasharray: 6 5; }
+      .chip { fill: #0b1220; stroke: #2b3d63; }
+      .chipT { fill: #c3cee0; font-size: 11.5px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="940" rx="22" fill="url(#bg)"/>
+  <text x="40" y="52" fill="#f4ede1" font-size="28" font-weight="900">CityQuest</text>
+  <text x="196" y="52" fill="#8fb4e8" font-size="17" font-weight="600">real inputs  →  live world  →  plan  →  proof  →  3D experience</text>
+  <text x="1360" y="52" fill="#6f7f9c" font-size="12" text-anchor="end">every arrow is a real call; numbers measured Oct 25, 2026</text>
+
+  <!-- lanes -->
+  <rect class="lane" x="30" y="80" width="250" height="640" rx="16"/>
+  <text class="laneTitle" x="50" y="108">1  REAL INPUTS</text>
+  <rect class="lane" x="300" y="80" width="290" height="640" rx="16"/>
+  <text class="laneTitle" x="320" y="108">2  UNDERSTAND</text>
+  <rect class="lane" x="610" y="80" width="420" height="640" rx="16"/>
+  <text class="laneTitle" x="630" y="108">3  PLAN AND PROVE · CLOUD RUN</text>
+  <rect class="lane" x="1050" y="80" width="320" height="640" rx="16"/>
+  <text class="laneTitle" x="1070" y="108">4  EXPERIENCE</text>
+
+  <!-- 1 inputs -->
+  <rect class="card" x="48" y="128" width="214" height="78" rx="12"/>
+  <text class="h" x="64" y="154">Phone camera</text>
+  <text class="t" x="64" y="175">rear camera, 1 frame/s JPEG</text>
+  <text class="t" x="64" y="193">or a recorded video replay</text>
+  <rect class="card" x="48" y="222" width="214" height="78" rx="12"/>
+  <text class="h" x="64" y="248">Voice</text>
+  <text class="t" x="64" y="269">16 kHz PCM from the mic</text>
+  <text class="t" x="64" y="287">or the video's own audio</text>
+  <rect class="card" x="48" y="316" width="214" height="62" rx="12"/>
+  <text class="h" x="64" y="342">GPS</text>
+  <text class="t" x="64" y="362">sent with every request</text>
+  <rect class="card" x="48" y="394" width="214" height="62" rx="12"/>
+  <text class="h" x="64" y="420">Typed request</text>
+  <text class="t" x="64" y="440">"Valencia St, 30 min, coffee"</text>
+  <rect class="card" x="48" y="472" width="214" height="62" rx="12"/>
+  <text class="h" x="64" y="498">A judge's street</text>
+  <text class="t" x="64" y="518">any place name, anywhere</text>
+
+  <!-- 2 understand -->
+  <rect class="cardHot" x="318" y="128" width="254" height="200" rx="12"/>
+  <text class="h" x="334" y="154">Gemini 3.8 Live</text>
+  <text class="m" x="334" y="174">gemini-3.8-live · ephemeral token</text>
+  <text class="t" x="334" y="198">sees what you point at, talks back,</text>
+  <text class="t" x="334" y="216">can be interrupted</text>
+  <text class="t" x="334" y="242">tools (non-blocking):</text>
+  <text class="t" x="334" y="262">plan_quest · replan · ask_city</text>
+  <text class="t" x="334" y="280">past_hackathons · Google Search</text>
+  <text class="t" x="334" y="306">passes the area it sees or hears</text>
+  <rect class="card" x="318" y="346" width="254" height="110" rx="12"/>
+  <text class="h" x="334" y="372">Router</text>
+  <text class="m" x="334" y="392">gemini-3.5-flash-lite · ~1.5 s</text>
+  <text class="t" x="334" y="416">new quest / replan / chit chat</text>
+  <text class="t" x="334" y="434">extracts minutes, wants, place</text>
+
+  <!-- 3 plan and prove -->
+  <rect class="card" x="628" y="128" width="384" height="92" rx="12"/>
+  <text class="h" x="644" y="154">Live area · Google Places</text>
+  <text class="m" x="644" y="174">Text Search + Nearby Search · ~40 places in ~0.5 s</text>
+  <text class="t" x="644" y="196">open now · serves coffee/breakfast/dessert · price range</text>
+  <text class="t" x="644" y="213">Google summary · distance · the focus place's viewport</text>
+  <rect class="cardHot" x="628" y="236" width="384" height="92" rx="12"/>
+  <text class="h" x="644" y="262">World Director</text>
+  <text class="m" x="644" y="282">gemini-4-argon · structured output · ~9 to 11 s</text>
+  <text class="t" x="644" y="304">2 to 4 stops from live places only, schema-checked;</text>
+  <text class="t" x="644" y="321">replans as a delta via previous_interaction_id</text>
+  <rect class="card" x="628" y="344" width="384" height="112" rx="12"/>
+  <text class="h" x="644" y="370">Verifier loop</text>
+  <text class="m" x="644" y="390">verify_quest.py · Places hours + Routes WALK · &lt;1 s</text>
+  <text class="t" x="644" y="412">fail → gemini-3.8-flash ranks swaps (parallel)</text>
+  <text class="t" x="644" y="430">→ --check-place each candidate → rerun (max 2)</text>
+  <text class="t" x="644" y="448">cost = sum of Google price ranges per stop</text>
+  <rect class="cardAgent" x="628" y="476" width="186" height="128" rx="12"/>
+  <text class="h" x="642" y="500">Managed agent</text>
+  <text class="m" x="642" y="519" font-size="9.5">antigravity-preview-09-2026</text>
+  <text class="t" x="642" y="541">reruns the verifier in a</text>
+  <text class="t" x="642" y="558">Google sandbox; key via</text>
+  <text class="t" x="642" y="575">credential proxy; own verdict</text>
+  <text class="t" x="642" y="592">(~80 to 90 s, in parallel)</text>
+  <rect class="cardMem" x="826" y="476" width="186" height="128" rx="12"/>
+  <text class="h" x="840" y="500">City Memory</text>
+  <text class="m" x="840" y="519">gemini-4-argon</text>
+  <text class="t" x="840" y="541">2,088 places + reviews</text>
+  <text class="t" x="840" y="558">565,115 tokens, one context</text>
+  <text class="t" x="840" y="575">reviews every quest;</text>
+  <text class="t" x="840" y="592">answers ask_city</text>
+  <rect class="card" x="628" y="620" width="384" height="80" rx="12"/>
+  <text class="h" x="644" y="646">Event stream</text>
+  <text class="m" x="644" y="666">SSE /api/events · one line per real call</text>
+  <text class="t" x="644" y="688">scan · director · places · routes · swap · agent · memory</text>
+
+  <!-- 4 experience -->
+  <rect class="card" x="1068" y="128" width="284" height="150" rx="12"/>
+  <text class="h" x="1084" y="154">Map app (phone)</text>
+  <text class="m" x="1084" y="174">Maps JS · Photorealistic 3D</text>
+  <text class="t" x="1084" y="198">numbered stops, walking route,</text>
+  <text class="t" x="1084" y="216">flyCameraTo, quest card, cost</text>
+  <text class="t" x="1084" y="240">HUD: clock, step timings in ms,</text>
+  <text class="t" x="1084" y="258">PASS / FIXED / FAIL badge</text>
+  <rect class="cardHot" x="1068" y="294" width="284" height="186" rx="12"/>
+  <text class="h" x="1084" y="320">Three.js sim (headset)</text>
+  <text class="m" x="1084" y="340">3d-tiles-renderer · Map Tiles API</text>
+  <text class="t" x="1084" y="364">Google 3D Tiles, re-centered on</text>
+  <text class="t" x="1084" y="382">any area; ground raycast-measured</text>
+  <text class="t" x="1084" y="406">building breakdown: cutaway shader,</text>
+  <text class="t" x="1084" y="424">stalls at real place positions</text>
+  <text class="t" x="1084" y="448">beacons green open / red closed,</text>
+  <text class="t" x="1084" y="466">glowing route, two-lens view</text>
+  <rect class="card" x="1068" y="496" width="284" height="92" rx="12"/>
+  <text class="h" x="1084" y="522">The guide speaks</text>
+  <text class="t" x="1084" y="544">title, stops, estimated cost, and</text>
+  <text class="t" x="1084" y="562">why a stop was swapped, in the</text>
+  <text class="t" x="1084" y="580">verifier's own words</text>
+
+  <!-- arrows -->
+  <path class="flow" d="M262 167 H318" marker-end="url(#arrow)"/>
+  <path class="flow" d="M262 261 H318" marker-end="url(#arrow)"/>
+  <path class="flow" d="M262 425 H318" marker-end="url(#arrow)"/>
+  <path class="flow" d="M262 503 C 290 503, 290 410, 318 410" marker-end="url(#arrow)"/>
+  <path class="flow" d="M262 347 C 292 347, 292 372, 318 372" marker-end="url(#arrow)"/>
+  <path class="flow" d="M572 228 C 600 228, 600 175, 628 175" marker-end="url(#arrow)"/>
+  <path class="flow" d="M572 400 C 600 400, 600 205, 628 205" marker-end="url(#arrow)"/>
+  <path class="flow" d="M820 220 V236" marker-end="url(#arrow)"/>
+  <path class="flow" d="M820 328 V344" marker-end="url(#arrow)"/>
+  <path class="flowG" d="M720 456 V476" marker-end="url(#arrowG)"/>
+  <path class="flowP" d="M918 456 V476" marker-end="url(#arrow)"/>
+  <path class="flow" d="M820 604 V620" marker-end="url(#arrow)"/>
+  <path class="flow" d="M1012 660 C 1040 660, 1040 203, 1068 203" marker-end="url(#arrow)"/>
+  <path class="flow" d="M1012 670 C 1045 670, 1045 387, 1068 387" marker-end="url(#arrow)"/>
+
+  <!-- offline assets band -->
+  <rect class="lane" x="30" y="740" width="1340" height="170" rx="16"/>
+  <text class="laneTitle" x="50" y="768">MADE ONCE, NEVER AT DEMO TIME</text>
+  <g>
+    <rect class="chip" x="50" y="784" width="250" height="52" rx="10"/>
+    <text class="chipT" x="64" y="806">Nano Banana 2.1</text>
+    <text class="t" x="64" y="825">15 collectible sprites</text>
+    <rect class="chip" x="314" y="784" width="250" height="52" rx="10"/>
+    <text class="chipT" x="328" y="806">Lyria 3 clip</text>
+    <text class="t" x="328" y="825">30 s soundtrack loop</text>
+    <rect class="chip" x="578" y="784" width="250" height="52" rx="10"/>
+    <text class="chipT" x="592" y="806">Deep Research</text>
+    <text class="t" x="592" y="825">cited merchant notes (704 s run)</text>
+    <rect class="chip" x="842" y="784" width="250" height="52" rx="10"/>
+    <text class="chipT" x="856" y="806">Higgsfield</text>
+    <text class="t" x="856" y="825">GPT Image 2.5 → Hunyuan3D stall GLB</text>
+    <rect class="chip" x="1106" y="784" width="246" height="52" rx="10"/>
+    <text class="chipT" x="1120" y="806">Higgsfield Seedance 2.5</text>
+    <text class="t" x="1120" y="825">sim-style redo of the real jog</text>
+    <rect class="chip" x="50" y="846" width="514" height="48" rx="10"/>
+    <text class="chipT" x="64" y="875">City Memory build: 450 Places calls over 225 grid cells (8.8 s), primed once (30 s)</text>
+    <rect class="chip" x="578" y="846" width="514" height="48" rx="10"/>
+    <text class="chipT" x="592" y="875">gemini-4-argon also wrote the interactive architecture page (web/architecture.html)</text>
+    <rect class="chip" x="1106" y="846" width="246" height="48" rx="10"/>
+    <text class="chipT" x="1120" y="875">Keys: env only, never in files</text>
+  </g>
+</svg>
